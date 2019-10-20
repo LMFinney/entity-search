@@ -42,11 +42,11 @@ function checkPerformance(length: number): PerformanceResult {
     generatedCountries
   );
   return {
-    buildingMap: +buildMap.toFixed(3),
-    keyBySearch: +search.toFixed(3),
-    keyByTotal: +(buildMap + search).toFixed(3),
     length,
-    simple: +convertSimple(generatedAthletes, generatedCountries)[1].toFixed(3)
+    simple: +convertSimple(generatedAthletes, generatedCountries)[1].toFixed(3),
+    ['building the entity map']: +buildMap.toFixed(3),
+    ['searching with entity']: +search.toFixed(3),
+    ['total time w/ entity']: +(buildMap + search).toFixed(3)
   };
 }
 

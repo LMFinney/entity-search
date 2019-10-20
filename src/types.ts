@@ -17,7 +17,7 @@ export interface AthleteDisplay {
 export interface PerformanceResult {
   length: number;
   simple: number;
-  buildingMap: number;
-  keyBySearch: number;
-  keyByTotal: number;
+  ['building the entity map']: number;
+  ['searching with entity']: number;
+  ['total time w/ entity']: number;
 }
