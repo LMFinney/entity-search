@@ -7,7 +7,7 @@ export function convertSimple(
   countries: Country[]
 ): [AthleteDisplay[], number] {
   const start = performance.now();
-  const displays = athletes.map(athlete => {
+  const athleteDisplays: AthleteDisplay[] = athletes.map(athlete => {
     return {
       countryName: countries.find(country => country.id === athlete.countryId)
         .name,
@@ -15,7 +15,7 @@ export function convertSimple(
     };
   });
   const end = performance.now();
-  return [displays, end - start];
+  return [athleteDisplays, end - start];
 }
 
 export function convertEntity(
@@ -25,12 +25,12 @@ export function convertEntity(
   const start = performance.now();
   const countryDictionary = keyBy(countries, 'id');
   const middle = performance.now();
-  const displays = athletes.map(athlete => {
+  const athleteDisplays: AthleteDisplay[] = athletes.map(athlete => {
     return {
       countryName: countryDictionary[athlete.countryId].name,
       name: athlete.name
     };
   });
   const end = performance.now();
-  return [displays, middle - start, end - middle];
+  return [athleteDisplays, middle - start, end - middle];
 }

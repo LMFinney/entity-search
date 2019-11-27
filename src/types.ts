@@ -15,9 +15,9 @@ export interface AthleteDisplay {
 }
 
 export interface PerformanceResult {
-  length: number;
-  simple: number;
-  ['building the entity map']: number;
-  ['searching with entity']: number;
-  ['total time w/ entity']: number;
+  countries: number;
+  'Array.find()': number;
+  'building the entity map': number;
+  'searching with entity': number;
+  'total time w/ entity': number;
 }

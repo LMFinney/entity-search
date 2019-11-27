@@ -20,13 +20,16 @@ export const athletes: Athlete[] = [
 
 const [simpleResult, simpleTime] = convertSimple(athletes, countries);
 console.table(simpleResult);
-console.log('simple time', +simpleTime.toFixed(3));
+console.log('Array.find() time', simpleTime.toFixed(3) + 's');
 const [entityResult, entityBuildMap, entitySearch] = convertEntity(
   athletes,
   countries
 );
 console.table(entityResult);
-console.log('entity time', +(entityBuildMap + entitySearch).toFixed(3));
+console.log(
+  'entity object time',
+  (entityBuildMap + entitySearch).toFixed(3) + 's'
+);
 
 const results = [1, 10, 100, 1000, 10000, 100000].map(length =>
   checkPerformance(length)
@@ -42,11 +45,14 @@ function checkPerformance(length: number): PerformanceResult {
     generatedCountries
   );
   return {
-    length,
-    simple: +convertSimple(generatedAthletes, generatedCountries)[1].toFixed(3),
-    ['building the entity map']: +buildMap.toFixed(3),
-    ['searching with entity']: +search.toFixed(3),
-    ['total time w/ entity']: +(buildMap + search).toFixed(3)
+    countries: length,
+    'Array.find()': +convertSimple(
+      generatedAthletes,
+      generatedCountries
+    )[1].toFixed(3),
+    'total time w/ entity': +(buildMap + search).toFixed(3),
+    'building the entity map': +buildMap.toFixed(3),
+    'searching with entity': +search.toFixed(3)
   };
 }
 
@@ -58,7 +64,7 @@ function initializeCountries(length: number) {
 }
 
 function initializeAthletes(length: number) {
-  return Array.from({ length }, (_, index: number) => ({
+  return Array.from({ length: 1000 }, (_, index: number) => ({
     countryId: getRandomInt(length),
     id: index,
     name: name.findName()

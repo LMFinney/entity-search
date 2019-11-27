@@ -44,28 +44,26 @@ country names. Additionally, it shows the execution time for each approach. Gene
 time for the entity approach is slower for this size of problem.
 
 Then, the application uses [faker.js](https://www.npmjs.com/package/faker) to create fake athletes
-and countries, uses both approaches to associate them, and then shows the result. Below is one
+and countries, uses both approaches to associate them, and then shows the result. Below is a typical
 resulting table (because there is randomness in the data, each run has different runtimes, but the
 the overall trend is consistent):
 
-| (index) | length | simple    | building the entity map | searching with entity | total time w/ entity |
-| ------- | ------ | --------- | ----------------------- | --------------------- | -------------------- |
-| 0       | 1      | 0.01      | 0.037                   | 0.014                 | 0.051                |
-| 1       | 10     | 0.007     | 0.013                   | 0.003                 | 0.016                |
-| 2       | 100    | 0.252     | 0.029                   | 0.012                 | 0.040                |
-| 3       | 1000   | 16.154    | 0.566                   | 0.398                 | 0.964                |
-| 4       | 10000  | 251.483   | 3.239                   | 2.628                 | 5.868                |
-| 5       | 100000 | 12576.082 | 8.896                   | 44.044                | 52.939               |
+| (index) | countries | Array.find() | total time w/ entity | building the entity map | searching with entity |
+| ------- | --------- | ------------ | -------------------- | ----------------------- | --------------------- |
+| 0       | 1         | 0.288        | 0.226                | 0.023                   | 0.203                 |
+| 1       | 10        | 0.570        | 0.486                | 0.036                   | 0.450                 |
+| 2       | 100       | 1.546        | 0.176                | 0.024                   | 0.151                 |
+| 3       | 1000      | 0.884        | 0.378                | 0.061                   | 0.317                 |
+| 4       | 10000     | 10.926       | 0.765                | 0.679                   | 0.086                 |
+| 5       | 100000    | 275.371      | 6.527                | 6.381                   | 0.146                 |
 
-In building the table, the application first creates an Athletes array with one value and associates it with one
-country. Next, it creates arrays with 10 values and associates them, then 100 values, etc.
+In building the table, the application creates 1000 Athletes and associates them with a different
+number of randomly-assigned countries: 1, 10, 100, etc.
 
-For 1 and 10 elements, using the simple approach is quicker, largely because the startup time to
-build the map overwhelms the time of the actual search. For 100, 1000, and 10000 elements, building
-the map for the entity approach takes more time than actually searching using it, but the search is
-so quick that the initial startup time is worth it; by the 10000-element run, the total running time
-for the entity approach is roughly 40 times less than for the simple approach. For the 100000
-element run, the simple approach is over 350 times slower.
+For 1 and 10 countries, using the simple approach takes roughly the same amount of time. For 100,
+1000, and 10000 countries, the entity approach is starting to be a bit faster; by the 10000-country
+run, the total running time for the entity approach is roughly 13 times less than for the simple
+approach. For the 100000 country run, the simple approach is about 40 times slower.
 
 The lesson is that the entity approach scales significantly better than the simple approach: it's a
-*O(1)* comparison instead of a *O(n)* comparison, and that pays huge dividends for large data sets.
+_O(1)_ comparison instead of a _O(n)_ comparison, and that pays huge dividends for large data sets.
