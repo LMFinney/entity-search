@@ -13,11 +13,11 @@
   },
   "dependencies": {
     "faker": "^4.1.0",
-    "lodash.keyby": "^4.6.0"
+    "lodash": "^4.6.0"
   },
   "devDependencies": {
     "@types/faker": "^4.1.6",
-    "@types/lodash.keyby": "^4.6.6",
+    "@types/lodash": "^4.6.6",
     "@types/node": "^12.11.1",
     "prettier": "^1.18.2",
     "ts-node": "^8.4.1",
